@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 2.8.5 FATAL_ERROR)
+project(C C)
+if(DEBUG)
+    add_definitions(-DDEBUG)
+endif(DEBUG)
+add_executable(c main.c)
