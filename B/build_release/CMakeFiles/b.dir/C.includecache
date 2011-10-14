@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/evil/Studia/Przedmioty/WdP/B/main.c
+stdio.h
+-
+stdlib.h
+-
+stdbool.h
+-
+stdio.h
+-
+stdlib.h
+-
+stdint.h
+-
+
