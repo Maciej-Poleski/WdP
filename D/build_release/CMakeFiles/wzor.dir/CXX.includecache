@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/evil/Studia/Przedmioty/WdP/D/main.cxx
+iostream
+-
+algorithm
+-
+fstream
+-
+vector
+-
+stdint.h
+-
+

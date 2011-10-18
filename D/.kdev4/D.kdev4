@@ -1,0 +1,36 @@
+[Buildset]
+BuildItems=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x01\x00\x00\x00\x02\x00D)
+
+[CMake]
+BuildDirs[$e]=$HOME/Studia/Przedmioty/WdP/D/build,$HOME/Studia/Przedmioty/WdP/D/build_release
+CMakeDir=/usr/share/cmake/Modules
+Current CMake Binary=file:///usr/bin/cmake
+CurrentBuildDir=file:///home/evil/Studia/Przedmioty/WdP/D/build_release
+CurrentBuildType=Release
+CurrentInstallDir=
+ProjectRootRelative=./
+
+[Launch]
+Launch Configurations=Launch Configuration 0
+
+[Launch][Launch Configuration 0]
+Configured Launch Modes=execute
+Configured Launchers=nativeAppLauncher
+Name=d
+Type=Native Application
+
+[Launch][Launch Configuration 0][Data]
+Arguments=testy/t00.in testy/t00.tout
+Dependencies=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x02\x00\x00\x00\x02\x00D\x00\x00\x00\x02\x00d)
+Dependency Action=Build
+EnvironmentGroup=default
+Executable=
+External Terminal=konsole --noclose --workdir %workdir -e %exe
+Project Target=D,d
+Use External Terminal=false
+Working Directory=file:///home/evil/Studia/Przedmioty/WdP/D
+isExecutable=false
+
+[MakeBuilder]
+Default Make Environment Profile=0
+Number Of Jobs=1
