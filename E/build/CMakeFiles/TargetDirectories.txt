@@ -1,0 +1,3 @@
+/home/evil/Studia/Przedmioty/WdP/E/build/CMakeFiles/e.dir
+/home/evil/Studia/Przedmioty/WdP/E/build/CMakeFiles/find_test.dir
+/home/evil/Studia/Przedmioty/WdP/E/build/CMakeFiles/wzor.dir
