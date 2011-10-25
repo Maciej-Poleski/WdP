@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++0x -O3 -DNDEBUG    CMakeFiles/wzor.dir/main.cxx.o  -o wzor -rdynamic 

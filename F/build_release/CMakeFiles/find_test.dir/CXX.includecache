@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/evil/Studia/Przedmioty/WdP/F/find.cxx
+iostream
+-
+cstdlib
+-
+fstream
+-
+stdint.h
+-
+vector
+-
+algorithm
+-
+random
+-
+functional
+-
+limits.h
+-
+
