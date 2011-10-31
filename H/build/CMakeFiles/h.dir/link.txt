@@ -1,0 +1,1 @@
+/usr/bin/gcc  -fprofile-arcs -ftest-coverage -g    -coverage CMakeFiles/h.dir/main.c.o  -o h -rdynamic 

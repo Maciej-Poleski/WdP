@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/home/evil/Studia/Przedmioty/WdP/H/build",
+  "command": "/usr/bin/c++    -std=c++0x -g   -o CMakeFiles/find_test.dir/find.cxx.o -c /home/evil/Studia/Przedmioty/WdP/H/find.cxx",
+  "file": "/home/evil/Studia/Przedmioty/WdP/H/find.cxx"
+},
+{
+  "directory": "/home/evil/Studia/Przedmioty/WdP/H/build",
+  "command": "/usr/bin/gcc   -fprofile-arcs -ftest-coverage -g   -o CMakeFiles/h.dir/main.c.o   -c /home/evil/Studia/Przedmioty/WdP/H/main.c",
+  "file": "/home/evil/Studia/Przedmioty/WdP/H/main.c"
+},
+{
+  "directory": "/home/evil/Studia/Przedmioty/WdP/H/build",
+  "command": "/usr/bin/c++    -std=c++0x -g   -o CMakeFiles/wzor.dir/main.cxx.o -c /home/evil/Studia/Przedmioty/WdP/H/main.cxx",
+  "file": "/home/evil/Studia/Przedmioty/WdP/H/main.cxx"
+}
+]
