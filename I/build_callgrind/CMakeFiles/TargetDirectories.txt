@@ -1,0 +1,2 @@
+/home/evil/Studia/Przedmioty/WdP/I/build_callgrind/CMakeFiles/find_test.dir
+/home/evil/Studia/Przedmioty/WdP/I/build_callgrind/CMakeFiles/i.dir

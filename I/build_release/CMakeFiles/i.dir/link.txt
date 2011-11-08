@@ -1,0 +1,1 @@
+/usr/bin/gcc  -O3 -DNDEBUG    CMakeFiles/i.dir/main.c.o  -o i -rdynamic 
