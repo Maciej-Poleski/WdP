@@ -1,0 +1,1 @@
+/usr/bin/gcc  -g    CMakeFiles/j.dir/main.c.o  -o j -rdynamic 

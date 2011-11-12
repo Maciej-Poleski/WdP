@@ -1,0 +1,754 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <title>LCOV - app.info - WdP/J/main.c</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">WdP/J</a> - main.c<span style="font-size: 80%;"> (source / <a href="main.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">app.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">49</td>
+            <td class="headerCovTableEntry">130</td>
+            <td class="headerCovTableEntryLo">37.7 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2011-11-12</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntryLo">38.5 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">27</td>
+            <td class="headerCovTableEntry">82</td>
+            <td class="headerCovTableEntryLo">32.9 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : // Maciej Poleski</a>
+<span class="lineNum">       2 </span>                :            : #ifndef DEBUG
+<span class="lineNum">       3 </span>                :            : #ifndef NDEBUG
+<span class="lineNum">       4 </span>                :            : #define NDEBUG
+<span class="lineNum">       5 </span>                :            : #endif
+<span class="lineNum">       6 </span>                :            : #define init(x,y)
+<span class="lineNum">       7 </span>                :            : #define end()
+<span class="lineNum">       8 </span>                :            : #define input(format,...) scanf(format,## __VA_ARGS__)
+<span class="lineNum">       9 </span>                :            : #define output(format,...) printf(format,## __VA_ARGS__)
+<span class="lineNum">      10 </span>                :            : #define check(x)
+<span class="lineNum">      11 </span>                :            : #else
+<span class="lineNum">      12 </span>                :            : #include &lt;stdio.h&gt;
+<span class="lineNum">      13 </span>                :            : #include &lt;stdlib.h&gt;
+<span class="lineNum">      14 </span>                :            : #include &lt;stdbool.h&gt;
+<span class="lineNum">      15 </span>                :            : FILE *_input=NULL;
+<span class="lineNum">      16 </span>                :            : FILE *_output=NULL;
+<span class="lineNum">      17 </span>                :            : bool _initialized=false;
+<span class="lineNum">      18 </span>                :            : void init(int argc,char**argv)
+<span class="lineNum">      19 </span>                :            : {
+<span class="lineNum">      20 </span>                :            :     if(argc!=3)
+<span class="lineNum">      21 </span>                :            :     {
+<span class="lineNum">      22 </span>                :            :         fprintf(stderr,&quot;Potrzebne są dwa argumenty &lt;wejście&gt; &lt;wyjście&gt;\n&quot;);
+<span class="lineNum">      23 </span>                :            :         exit(1);
+<span class="lineNum">      24 </span>                :            :     }
+<span class="lineNum">      25 </span>                :            :     _input=fopen(argv[1],&quot;r&quot;);
+<span class="lineNum">      26 </span>                :            :     _output=fopen(argv[2],&quot;w&quot;);
+<span class="lineNum">      27 </span>                :            :     _initialized=true;
+<span class="lineNum">      28 </span>                :            : }
+<span class="lineNum">      29 </span>                :            : void end(void)
+<span class="lineNum">      30 </span>                :            : {
+<span class="lineNum">      31 </span>                :            :     fclose(_input);
+<span class="lineNum">      32 </span>                :            :     fclose(_output);
+<span class="lineNum">      33 </span>                :            : }
+<span class="lineNum">      34 </span>                :            : #define input(format,...) fscanf(_input,format,## __VA_ARGS__)
+<span class="lineNum">      35 </span>                :            : #define output(format,...) fprintf(_output,format,## __VA_ARGS__)
+<span class="lineNum">      36 </span>                :            : #define check(x) assert(x)
+<span class="lineNum">      37 </span>                :            : #endif
+<span class="lineNum">      38 </span>                :            : 
+<span class="lineNum">      39 </span>                :            : #include &lt;stdio.h&gt;
+<span class="lineNum">      40 </span>                :            : #include &lt;stdlib.h&gt;
+<span class="lineNum">      41 </span>                :            : #include &lt;stdint.h&gt;
+<span class="lineNum">      42 </span>                :            : #include &lt;stdbool.h&gt;
+<span class="lineNum">      43 </span>                :            : #include &lt;limits.h&gt;
+<span class="lineNum">      44 </span>                :            : #include &lt;string.h&gt;
+<span class="lineNum">      45 </span>                :            : #include &lt;ctype.h&gt;
+<span class="lineNum">      46 </span>                :            : #include &lt;assert.h&gt;
+<span class="lineNum">      47 </span>                :            : #include &lt;time.h&gt;
+<span class="lineNum">      48 </span>                :            : 
+<span class="lineNum">      49 </span>                :            : char command[6];        ///&lt; Polecenie (WRITE|CODE|READ)
+<span class="lineNum">      50 </span>                :            : char encoded[33];       ///&lt; Postać wejściowa zaszyfrowana @warning BIG-ENDIAN!
+<span class="lineNum">      51 </span>                :            : char input[34];         ///&lt; Potencjalnie zawiera znak.
+<span class="lineNum">      52 </span>                :            : char decoded[33];       ///&lt; Liczba zakodowana (C-string).
+<span class="lineNum">      53 </span>                :            : 
+<span class="lineNum">      54 </span>                :            : /**
+<span class="lineNum">      55 </span>                :            :  * @brief Zamienia ciąg znaków na ciąg liczb [0,15]
+<span class="lineNum">      56 </span>                :            :  *
+<span class="lineNum">      57 </span>                :            :  * @param what Ciąg znaków (C-string)
+<a name="58"><span class="lineNum">      58 </span>                :            :  * @return void</a>
+<span class="lineNum">      59 </span>                :            :  **/
+<span class="lineNum">      60 </span>                :<span class="lineNoCov">          0 : inline void translateInputToInternal(char * what)</span>
+<span class="lineNum">      61 </span>                :            : {
+<span class="lineNum">      62 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for(;*what;++what)</span>
+<span class="lineNum">      63 </span>                :            :     {
+<span class="lineNum">      64 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if(*what&gt;='0' &amp;&amp; *what&lt;='9')</span>
+<span class="lineNum">      65 </span>                :            :         {
+<span class="lineNum">      66 </span>                :<span class="lineNoCov">          0 :             *what-='0';</span>
+<span class="lineNum">      67 </span>                :            :         }
+<span class="lineNum">      68 </span>                :            :         else
+<span class="lineNum">      69 </span>                :            :         {
+<span class="lineNum">      70 </span>                :            :             check(*what&gt;='A');
+<span class="lineNum">      71 </span>                :            :             check(*what&lt;='F');
+<span class="lineNum">      72 </span>                :<span class="lineNoCov">          0 :             *what-=('A'-10);</span>
+<span class="lineNum">      73 </span>                :            :         }
+<span class="lineNum">      74 </span>                :            :     }
+<span class="lineNum">      75 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">      76 </span>                :            : 
+<span class="lineNum">      77 </span>                :            : /**
+<span class="lineNum">      78 </span>                :            :  * @brief Dopełnia ciąg znaków cyframi '0'. Najmniej znacząca cyfra (big-endian)
+<span class="lineNum">      79 </span>                :            :  * trafi na pozycję what[31]
+<span class="lineNum">      80 </span>                :            :  *
+<span class="lineNum">      81 </span>                :            :  * @param what Ciąg znaków ['0','F'] (C-string)
+<a name="82"><span class="lineNum">      82 </span>                :            :  * @return void</a>
+<span class="lineNum">      83 </span>                :            :  **/
+<span class="lineNum">      84 </span>                :<span class="lineNoCov">          0 : inline void shiftRight(char* const what)</span>
+<span class="lineNum">      85 </span>                :            : {
+<span class="lineNum">      86 </span>                :            :     check(what);
+<span class="lineNum">      87 </span>                :<span class="lineNoCov">          0 :     int p=0;</span>
+<span class="lineNum">      88 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     while(what[p]) ++p;</span>
+<span class="lineNum">      89 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if(p!=32)</span>
+<span class="lineNum">      90 </span>                :            :     {
+<span class="lineNum">      91 </span>                :<span class="lineNoCov">          0 :         int e=32;</span>
+<span class="lineNum">      92 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         for(;p&gt;=0;--p,--e)</span>
+<span class="lineNum">      93 </span>                :<span class="lineNoCov">          0 :             what[e]=what[p];</span>
+<span class="lineNum">      94 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         for(;e&gt;=0;--e)</span>
+<span class="lineNum">      95 </span>                :<span class="lineNoCov">          0 :             what[e]='0';</span>
+<span class="lineNum">      96 </span>                :            :     }
+<span class="lineNum">      97 </span>                :            :     check(what[32]==0);
+<span class="lineNum">      98 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">      99 </span>                :            : 
+<span class="lineNum">     100 </span>                :            : /**
+<span class="lineNum">     101 </span>                :            :  * @brief Dekoduje liczbę w zapisie naturalnym o wskazanej podstawie.
+<span class="lineNum">     102 </span>                :            :  *
+<span class="lineNum">     103 </span>                :            :  * @param base Podstawa źródłowego systemu liczbowego.
+<a name="104"><span class="lineNum">     104 </span>                :            :  * @return int Zdekodowana liczba naturalna.</a>
+<span class="lineNum">     105 </span>                :            :  **/
+<span class="lineNum">     106 </span>                :<span class="lineNoCov">          0 : inline int decodeAny(int base)</span>
+<span class="lineNum">     107 </span>                :            : {
+<span class="lineNum">     108 </span>                :            :     check(encoded[32]==0);
+<span class="lineNum">     109 </span>                :            :     check(base!=0);
+<span class="lineNum">     110 </span>                :            :     check(base!=1);
+<span class="lineNum">     111 </span>                :            :     check(base&lt;=16);
+<span class="lineNum">     112 </span>                :<span class="lineNoCov">          0 :     int result=0;</span>
+<span class="lineNum">     113 </span>                :<span class="lineNoCov">          0 :     int i=0;</span>
+<span class="lineNum">     114 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for(;i&lt;32;++i)</span>
+<span class="lineNum">     115 </span>                :            :     {
+<span class="lineNum">     116 </span>                :<span class="lineNoCov">          0 :         result=result*base+encoded[i];</span>
+<span class="lineNum">     117 </span>                :            :     }
+<span class="lineNum">     118 </span>                :<span class="lineNoCov">          0 :     return result;</span>
+<span class="lineNum">     119 </span>                :            : }
+<span class="lineNum">     120 </span>                :            : 
+<span class="lineNum">     121 </span>                :            : /**
+<span class="lineNum">     122 </span>                :            :  * @brief Neguje liczbę w zapisie binarnym.
+<span class="lineNum">     123 </span>                :            :  *
+<span class="lineNum">     124 </span>                :            :  * @param what Wskaźnik na początek ciągu bitów.
+<span class="lineNum">     125 </span>                :            :  * @param count Ilość bitów do zanegowania.
+<a name="126"><span class="lineNum">     126 </span>                :            :  * @return void</a>
+<span class="lineNum">     127 </span>                :            :  **/
+<span class="lineNum">     128 </span>                :<span class="lineNoCov">          0 : inline void neg(char * what,int count)</span>
+<span class="lineNum">     129 </span>                :            : {
+<span class="lineNum">     130 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     while(count--)</span>
+<span class="lineNum">     131 </span>                :            :     {
+<span class="lineNum">     132 </span>                :<span class="lineNoCov">          0 :         *what=(*what==0)?1:0;</span>
+<span class="lineNum">     133 </span>                :<span class="lineNoCov">          0 :         ++what;</span>
+<span class="lineNum">     134 </span>                :            :     }
+<span class="lineNum">     135 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     136 </span>                :            : 
+<span class="lineNum">     137 </span>                :            : /**
+<span class="lineNum">     138 </span>                :            :  * @brief Inkrementuje liczbę w zapisie dwójkowym.
+<span class="lineNum">     139 </span>                :            :  *
+<span class="lineNum">     140 </span>                :            :  * @param what Wskaźnik na najmniej znaczący bit w zapisie big-endian.
+<a name="141"><span class="lineNum">     141 </span>                :            :  * @return void</a>
+<span class="lineNum">     142 </span>                :            :  **/
+<span class="lineNum">     143 </span>                :<span class="lineNoCov">          0 : inline void inc(char *what)</span>
+<span class="lineNum">     144 </span>                :            : {
+<span class="lineNum">     145 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     while(*what==1)</span>
+<span class="lineNum">     146 </span>                :<span class="lineNoCov">          0 :         *what--=0;</span>
+<span class="lineNum">     147 </span>                :<span class="lineNoCov">          0 :     *what=1;</span>
+<span class="lineNum">     148 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     149 </span>                :            : 
+<span class="lineNum">     150 </span>                :            : /**
+<span class="lineNum">     151 </span>                :            :  * @brief Dekoduje liczbę w formacie U2 (16 bitową)
+<span class="lineNum">     152 </span>                :            :  *
+<a name="153"><span class="lineNum">     153 </span>                :            :  * @return int</a>
+<span class="lineNum">     154 </span>                :            :  **/
+<span class="lineNum">     155 </span>                :<span class="lineNoCov">          0 : inline int decodeU2()</span>
+<span class="lineNum">     156 </span>                :            : {
+<span class="lineNum">     157 </span>                :            :     {
+<span class="lineNum">     158 </span>                :            :         check(encoded[0]==0);
+<span class="lineNum">     159 </span>                :            :         check(encoded[1]==0);
+<span class="lineNum">     160 </span>                :            :         check(encoded[2]==0);
+<span class="lineNum">     161 </span>                :            :         check(encoded[3]==0);
+<span class="lineNum">     162 </span>                :            :         check(encoded[4]==0);
+<span class="lineNum">     163 </span>                :            :         check(encoded[5]==0);
+<span class="lineNum">     164 </span>                :            :         check(encoded[6]==0);
+<span class="lineNum">     165 </span>                :            :         check(encoded[7]==0);
+<span class="lineNum">     166 </span>                :            :         check(encoded[8]==0);
+<span class="lineNum">     167 </span>                :            :         check(encoded[9]==0);
+<span class="lineNum">     168 </span>                :            :         check(encoded[10]==0);
+<span class="lineNum">     169 </span>                :            :         check(encoded[11]==0);
+<span class="lineNum">     170 </span>                :            :         check(encoded[12]==0);
+<span class="lineNum">     171 </span>                :            :         check(encoded[13]==0);
+<span class="lineNum">     172 </span>                :            :         check(encoded[14]==0);
+<span class="lineNum">     173 </span>                :            :         check(encoded[15]==0);
+<span class="lineNum">     174 </span>                :            :     }
+<span class="lineNum">     175 </span>                :            :     check(encoded[32]==0);
+<span class="lineNum">     176 </span>                :<span class="lineNoCov">          0 :     char sign=encoded[32-16];</span>
+<span class="lineNum">     177 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if(sign)</span>
+<span class="lineNum">     178 </span>                :            :     {
+<span class="lineNum">     179 </span>                :<span class="lineNoCov">          0 :         neg(&amp;encoded[32-16],16);</span>
+<span class="lineNum">     180 </span>                :<span class="lineNoCov">          0 :         inc(&amp;encoded[31]);</span>
+<span class="lineNum">     181 </span>                :            :         //encoded[15]=0;
+<span class="lineNum">     182 </span>                :            :     }
+<span class="lineNum">     183 </span>                :<span class="lineNoCov">          0 :     int result=decodeAny(2);</span>
+<span class="lineNum">     184 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if(sign)</span>
+<span class="lineNum">     185 </span>                :<span class="lineNoCov">          0 :         result=-result;</span>
+<span class="lineNum">     186 </span>                :<span class="lineNoCov">          0 :     return result;</span>
+<span class="lineNum">     187 </span>                :            : }
+<span class="lineNum">     188 </span>                :            : 
+<span class="lineNum">     189 </span>                :            : /**
+<span class="lineNum">     190 </span>                :            :  * @brief Parsuje ciąg znaków z tablicy encoded zgodnie z podanym argumentem.
+<span class="lineNum">     191 </span>                :            :  *
+<span class="lineNum">     192 </span>                :            :  * @param day Dzień w którym zakodowano liczbę.
+<a name="193"><span class="lineNum">     193 </span>                :            :  * @return int Zgekodowana liczba.</a>
+<span class="lineNum">     194 </span>                :            :  **/
+<span class="lineNum">     195 </span>                :<span class="lineNoCov">          0 : inline int decode(int day)</span>
+<span class="lineNum">     196 </span>                :            : {
+<span class="lineNum">     197 </span>                :            :     check(day&gt;=1);
+<span class="lineNum">     198 </span>                :            :     check(day&lt;=31);
+<span class="lineNum">     199 </span>                :<span class="lineNoCov">          0 :     shiftRight(encoded);</span>
+<span class="lineNum">     200 </span>                :<span class="lineNoCov">          0 :     translateInputToInternal(encoded);</span>
+<span class="lineNum">     201 </span>                :            :     check(encoded[32]==0);
+<span class="lineNum">     202 </span>                :<span class="lineNoCov">          0 :     day%=16;</span>
+<span class="lineNum">     203 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if(day==0)</span>
+<span class="lineNum">     204 </span>                :<span class="lineNoCov">          0 :         day=16;</span>
+<span class="lineNum">     205 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if(day==1)</span>
+<span class="lineNum">     206 </span>                :<span class="lineNoCov">          0 :         return decodeU2();</span>
+<span class="lineNum">     207 </span>                :            :     else
+<span class="lineNum">     208 </span>                :<span class="lineNoCov">          0 :         return decodeAny(day);</span>
+<span class="lineNum">     209 </span>                :            : }
+<span class="lineNum">     210 </span>                :            : 
+<span class="lineNum">     211 </span>                :            : /**
+<span class="lineNum">     212 </span>                :            :  * @brief Koduje liczbę naturalną do zapisu naturalnego o wskazanej podstawie
+<span class="lineNum">     213 </span>                :            :  *
+<span class="lineNum">     214 </span>                :            :  * Format Little-Endian.
+<span class="lineNum">     215 </span>                :            :  *
+<span class="lineNum">     216 </span>                :            :  * @param number Wejściowa liczba naturalna.
+<span class="lineNum">     217 </span>                :            :  * @param base Podstawa docelowego systemu liczbowego.
+<a name="218"><span class="lineNum">     218 </span>                :            :  * @return char* Zakodowany ciąg cyfr w postaci Little-Endian.</a>
+<span class="lineNum">     219 </span>                :            :  **/
+<span class="lineNum">     220 </span>                :<span class="lineCov">     100000 : inline char * encodeToLittleEndianInternal(int number,int base)</span>
+<span class="lineNum">     221 </span>                :            : {
+<span class="lineNum">     222 </span>                :            :     check(base!=0);
+<span class="lineNum">     223 </span>                :            :     check(base!=1);
+<span class="lineNum">     224 </span>                :            :     check(number&gt;=0);
+<span class="lineNum">     225 </span>                :            :     static char buffer[33];
+<span class="lineNum">     226 </span>                :<span class="lineCov">     100000 :     int i=0;</span>
+<span class="lineNum">     227 </span>        [<span class="branchCov" title="Branch 0 was taken 3100162 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">    3100162 :     for(;i&lt;32;++i)</span>
+<span class="lineNum">     228 </span>                :            :     {
+<span class="lineNum">     229 </span>        [<span class="branchCov" title="Branch 0 was taken 100000 times"> + </span><span class="branchCov" title="Branch 1 was taken 3000162 times"> + </span>]:<span class="lineCov">    3100162 :         if(number==0)</span>
+<span class="lineNum">     230 </span>                :<span class="lineCov">     100000 :             break;</span>
+<span class="lineNum">     231 </span>                :<span class="lineCov">    3000162 :         buffer[i]=number%base;</span>
+<span class="lineNum">     232 </span>                :<span class="lineCov">    3000162 :         number/=base;</span>
+<span class="lineNum">     233 </span>                :            :     }
+<span class="lineNum">     234 </span>        [<span class="branchCov" title="Branch 0 was taken 299838 times"> + </span><span class="branchCov" title="Branch 1 was taken 100000 times"> + </span>]:<span class="lineCov">     399838 :     for(;i&lt;=32;++i)</span>
+<span class="lineNum">     235 </span>                :<span class="lineCov">     299838 :         buffer[i]=0;</span>
+<span class="lineNum">     236 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 100000 times"> + </span>]:<span class="lineCov">     100000 :     if(number&gt;0)</span>
+<span class="lineNum">     237 </span>                :<span class="lineNoCov">          0 :         buffer[0]=100;</span>
+<span class="lineNum">     238 </span>                :<span class="lineCov">     100000 :     return buffer;</span>
+<span class="lineNum">     239 </span>                :            : }
+<span class="lineNum">     240 </span>                :            : 
+<span class="lineNum">     241 </span>                :            : /**
+<span class="lineNum">     242 </span>                :            :  * @brief Koduje dowolną liczbę całkowitą do zapisu naturalnego z minusem
+<span class="lineNum">     243 </span>                :            :  * o wskazanej podstawie.
+<span class="lineNum">     244 </span>                :            :  *
+<span class="lineNum">     245 </span>                :            :  * @param number Liczba do zakodowania
+<span class="lineNum">     246 </span>                :            :  * @param base Podstawa docelowego systemu liczbowego.
+<a name="247"><span class="lineNum">     247 </span>                :            :  * @return void</a>
+<span class="lineNum">     248 </span>                :            :  **/
+<span class="lineNum">     249 </span>                :<span class="lineNoCov">          0 : inline void encodeAny(int number,int base)</span>
+<span class="lineNum">     250 </span>                :            : {
+<span class="lineNum">     251 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     char sign=number&lt;0?'-':'+';</span>
+<span class="lineNum">     252 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if(number&lt;0)</span>
+<span class="lineNum">     253 </span>                :<span class="lineNoCov">          0 :         number=-number;</span>
+<span class="lineNum">     254 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if(sign=='-')</span>
+<span class="lineNum">     255 </span>                :<span class="lineNoCov">          0 :         output(&quot;%c&quot;,'-');</span>
+<span class="lineNum">     256 </span>                :<span class="lineNoCov">          0 :     char *internal=encodeToLittleEndianInternal(number,base);</span>
+<span class="lineNum">     257 </span>                :<span class="lineNoCov">          0 :     int i=32;</span>
+<span class="lineNum">     258 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for(;i&gt;0;--i)</span>
+<span class="lineNum">     259 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if(internal[i])</span>
+<span class="lineNum">     260 </span>                :<span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">     261 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for(;i&gt;=0;--i)</span>
+<span class="lineNum">     262 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         output(&quot;%c&quot;,internal[i]&lt;=9?internal[i]+'0':internal[i]+'A'-10);</span>
+<span class="lineNum">     263 </span>                :<span class="lineNoCov">          0 :     output(&quot;\n&quot;);</span>
+<span class="lineNum">     264 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     265 </span>                :            : 
+<span class="lineNum">     266 </span>                :            : /**
+<span class="lineNum">     267 </span>                :            :  * @brief Koduje dowolną liczbę całkowitą do formatu U2 lub wypisuje informację
+<span class="lineNum">     268 </span>                :            :  * o błędzie.
+<span class="lineNum">     269 </span>                :            :  *
+<span class="lineNum">     270 </span>                :            :  * @param number Wejściowa liczba całkowita
+<a name="271"><span class="lineNum">     271 </span>                :            :  * @return void</a>
+<span class="lineNum">     272 </span>                :            :  **/
+<span class="lineNum">     273 </span>                :<span class="lineCov">     100000 : inline void encodeU2(int number)</span>
+<span class="lineNum">     274 </span>                :            : {
+<span class="lineNum">     275 </span>        [<span class="branchCov" title="Branch 0 was taken 49875 times"> + </span><span class="branchCov" title="Branch 1 was taken 50125 times"> + </span>]:<span class="lineCov">     100000 :     char sign=number&lt;0?'-':'+';</span>
+<span class="lineNum">     276 </span>        [<span class="branchCov" title="Branch 0 was taken 49875 times"> + </span><span class="branchCov" title="Branch 1 was taken 50125 times"> + </span>]:<span class="lineCov">     100000 :     if(number&lt;0)</span>
+<span class="lineNum">     277 </span>                :<span class="lineCov">      49875 :         number=-number;</span>
+<span class="lineNum">     278 </span>                :<span class="lineCov">     100000 :     char *internal=encodeToLittleEndianInternal(number,2);</span>
+<span class="lineNum">     279 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 100000 times"> + </span>]:<span class="lineCov">     100000 :     if(internal[0]==100)</span>
+<span class="lineNum">     280 </span>                :            :     {
+<span class="lineNum">     281 </span>                :<span class="lineNoCov">          0 :         output(&quot;ERROR\n&quot;);</span>
+<span class="lineNum">     282 </span>                :<span class="lineNoCov">          0 :         return;</span>
+<span class="lineNum">     283 </span>                :            :     }
+<span class="lineNum">     284 </span>                :<span class="lineCov">     100000 :     int i=32;</span>
+<span class="lineNum">     285 </span>        [<span class="branchCov" title="Branch 0 was taken 399838 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     399838 :     for(;i&gt;0;--i)</span>
+<span class="lineNum">     286 </span>        [<span class="branchCov" title="Branch 0 was taken 100000 times"> + </span><span class="branchCov" title="Branch 1 was taken 299838 times"> + </span>]:<span class="lineCov">     399838 :         if(internal[i])</span>
+<span class="lineNum">     287 </span>                :<span class="lineCov">     100000 :             break;</span>
+<span class="lineNum">     288 </span>        [<span class="branchCov" title="Branch 0 was taken 99998 times"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">     100000 :     if(i&gt;=15)</span>
+<span class="lineNum">     289 </span>                :            :     {
+<span class="lineNum">     290 </span>                :<span class="lineCov">      99998 :         output(&quot;ERROR\n&quot;);</span>
+<span class="lineNum">     291 </span>                :<span class="lineCov">      99998 :         return;</span>
+<span class="lineNum">     292 </span>                :            :     }
+<span class="lineNum">     293 </span>                :<span class="lineCov">          2 :     int j=0;</span>
+<span class="lineNum">     294 </span>        [<span class="branchCov" title="Branch 0 was taken 28 times"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">         30 :     for(;j&lt;=i;++j)</span>
+<span class="lineNum">     295 </span>                :<span class="lineCov">         28 :         decoded[31-j]=internal[j];</span>
+<span class="lineNum">     296 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">          2 :     if(sign=='-')</span>
+<span class="lineNum">     297 </span>                :            :     {
+<span class="lineNum">     298 </span>                :<span class="lineNoCov">          0 :         neg(&amp;decoded[16],16);</span>
+<span class="lineNum">     299 </span>                :<span class="lineNoCov">          0 :         inc(&amp;decoded[31]);</span>
+<span class="lineNum">     300 </span>                :            :     }
+<span class="lineNum">     301 </span>        [<span class="branchCov" title="Branch 0 was taken 32 times"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">         34 :     for(j=16;j&lt;32;++j)</span>
+<span class="lineNum">     302 </span>                :<span class="lineCov">         32 :         output(&quot;%c&quot;,decoded[j]+'0');</span>
+<span class="lineNum">     303 </span>                :<span class="lineCov">     100000 :     output(&quot;\n&quot;);</span>
+<span class="lineNum">     304 </span>                :            : }
+<span class="lineNum">     305 </span>                :            : 
+<span class="lineNum">     306 </span>                :            : /**
+<span class="lineNum">     307 </span>                :            :  * @brief Koduje wskazaną liczbę w wskazanym dniu.
+<span class="lineNum">     308 </span>                :            :  *
+<span class="lineNum">     309 </span>                :            :  * @param number Liczba całkowita do zakodowania
+<span class="lineNum">     310 </span>                :            :  * @param day Dzień w którym odbędzie się kodowanie [1,31]
+<a name="311"><span class="lineNum">     311 </span>                :            :  * @return void</a>
+<span class="lineNum">     312 </span>                :            :  **/
+<span class="lineNum">     313 </span>                :<span class="lineCov">     100000 : inline void encode(int number, int day)</span>
+<span class="lineNum">     314 </span>                :            : {
+<span class="lineNum">     315 </span>                :<span class="lineCov">     100000 :     day%=16;</span>
+<span class="lineNum">     316 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 100000 times"> + </span>]:<span class="lineCov">     100000 :     if(day==0)</span>
+<span class="lineNum">     317 </span>                :<span class="lineNoCov">          0 :         day=16;</span>
+<span class="lineNum">     318 </span>        [<span class="branchCov" title="Branch 0 was taken 100000 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     100000 :     if(day==1)</span>
+<span class="lineNum">     319 </span>                :<span class="lineCov">     100000 :         encodeU2(number);</span>
+<span class="lineNum">     320 </span>                :            :     else
+<span class="lineNum">     321 </span>                :<span class="lineNoCov">          0 :         encodeAny(number,day);</span>
+<a name="322"><span class="lineNum">     322 </span>                :<span class="lineCov">     100000 : }</span></a>
+<span class="lineNum">     323 </span>                :            : 
+<span class="lineNum">     324 </span>                :<span class="lineCov">          1 : inline void solution(void)</span>
+<span class="lineNum">     325 </span>                :            : {
+<span class="lineNum">     326 </span>                :            :     int z;
+<span class="lineNum">     327 </span>                :<span class="lineCov">          1 :     input(&quot;%i&quot;,&amp;z);</span>
+<span class="lineNum">     328 </span>        [<span class="branchCov" title="Branch 0 was taken 100000 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">     100001 :     while(z--)</span>
+<span class="lineNum">     329 </span>                :            :     {
+<span class="lineNum">     330 </span>                :<span class="lineCov">     100000 :         input(&quot;%s&quot;,command);</span>
+<span class="lineNum">     331 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 100000 times"> + </span>]:<span class="lineCov">     100000 :         if(command[0]=='W')</span>
+<span class="lineNum">     332 </span>                :            :         {
+<span class="lineNum">     333 </span>                :<span class="lineNoCov">          0 :             time_t currentTime=time(NULL);</span>
+<span class="lineNum">     334 </span>                :<span class="lineNoCov">          0 :             int number,day=localtime(&amp;currentTime)-&gt;tm_mday;</span>
+<span class="lineNum">     335 </span>                :<span class="lineNoCov">          0 :             input(&quot;%i&quot;,&amp;number);</span>
+<span class="lineNum">     336 </span>                :<span class="lineNoCov">          0 :             encode(number,day);</span>
+<span class="lineNum">     337 </span>                :            :         }
+<span class="lineNum">     338 </span>        [<span class="branchCov" title="Branch 0 was taken 100000 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     100000 :         else if(command[0]=='C')</span>
+<span class="lineNum">     339 </span>                :            :         {
+<span class="lineNum">     340 </span>                :            :             int number,day;
+<span class="lineNum">     341 </span>                :<span class="lineCov">     100000 :             input(&quot;%i%i&quot;,&amp;number,&amp;day);</span>
+<span class="lineNum">     342 </span>                :<span class="lineCov">     100000 :             encode(number,day);</span>
+<span class="lineNum">     343 </span>                :            :         }
+<span class="lineNum">     344 </span>                :            :         else
+<span class="lineNum">     345 </span>                :            :         {
+<span class="lineNum">     346 </span>                :            :             // READ
+<span class="lineNum">     347 </span>                :            :             check(command[0]=='R');
+<span class="lineNum">     348 </span>                :            :             int day;
+<span class="lineNum">     349 </span>                :<span class="lineNoCov">          0 :             input(&quot;%s%i&quot;,input,&amp;day);</span>
+<span class="lineNum">     350 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :             if(input[0]=='-')</span>
+<span class="lineNum">     351 </span>                :<span class="lineNoCov">          0 :                 strcpy(encoded,input+1);</span>
+<span class="lineNum">     352 </span>                :            :             else
+<span class="lineNum">     353 </span>                :<span class="lineNoCov">          0 :                 strcpy(encoded,input);</span>
+<span class="lineNum">     354 </span>                :            :             check(day&gt;=1);
+<span class="lineNum">     355 </span>                :            :             check(day&lt;=31);
+<span class="lineNum">     356 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :             output(&quot;%d\n&quot;,decode(day)*((input[0]=='-')?-1:1));</span>
+<span class="lineNum">     357 </span>                :            :         }
+<span class="lineNum">     358 </span>                :            :     }
+<span class="lineNum">     359 </span>                :<span class="lineCov">          1 : }</span>
+<span class="lineNum">     360 </span>                :            : 
+<span class="lineNum">     361 </span>                :            : #ifdef DEBUG
+<span class="lineNum">     362 </span>                :            : 
+<span class="lineNum">     363 </span>                :            : void checkTranslateInputToInternal(void)
+<span class="lineNum">     364 </span>                :            : {
+<span class="lineNum">     365 </span>                :            :     char t1[]=&quot;1234567890&quot;;
+<span class="lineNum">     366 </span>                :            :     translateInputToInternal(t1);
+<span class="lineNum">     367 </span>                :            :     check(t1[0]==1);
+<span class="lineNum">     368 </span>                :            :     check(t1[1]==2);
+<span class="lineNum">     369 </span>                :            :     check(t1[2]==3);
+<span class="lineNum">     370 </span>                :            :     check(t1[3]==4);
+<span class="lineNum">     371 </span>                :            :     check(t1[4]==5);
+<span class="lineNum">     372 </span>                :            :     check(t1[5]==6);
+<span class="lineNum">     373 </span>                :            :     check(t1[6]==7);
+<span class="lineNum">     374 </span>                :            :     check(t1[7]==8);
+<span class="lineNum">     375 </span>                :            :     check(t1[8]==9);
+<span class="lineNum">     376 </span>                :            :     check(t1[9]==0);
+<span class="lineNum">     377 </span>                :            :     check(t1[10]==0); // NULL
+<span class="lineNum">     378 </span>                :            :     char t2[]=&quot;12ABCDEF0A1&quot;;
+<span class="lineNum">     379 </span>                :            :     translateInputToInternal(t2);
+<span class="lineNum">     380 </span>                :            :     check(t2[0]==1);
+<span class="lineNum">     381 </span>                :            :     check(t2[1]==2);
+<span class="lineNum">     382 </span>                :            :     check(t2[2]==10);
+<span class="lineNum">     383 </span>                :            :     check(t2[3]==11);
+<span class="lineNum">     384 </span>                :            :     check(t2[4]==12);
+<span class="lineNum">     385 </span>                :            :     check(t2[5]==13);
+<span class="lineNum">     386 </span>                :            :     check(t2[6]==14);
+<span class="lineNum">     387 </span>                :            :     check(t2[7]==15);
+<span class="lineNum">     388 </span>                :            :     check(t2[8]==0);
+<span class="lineNum">     389 </span>                :            :     check(t2[9]==10);
+<span class="lineNum">     390 </span>                :            :     check(t2[10]==1);
+<span class="lineNum">     391 </span>                :            :     check(t2[11]==0); // NULL
+<span class="lineNum">     392 </span>                :            :     char t3[]=&quot;00100&quot;;
+<span class="lineNum">     393 </span>                :            :     translateInputToInternal(t3);
+<span class="lineNum">     394 </span>                :            :     check(t3[0]==0);
+<span class="lineNum">     395 </span>                :            :     check(t3[1]==0);
+<span class="lineNum">     396 </span>                :            :     check(t3[2]==1);
+<span class="lineNum">     397 </span>                :            :     check(t3[3]==0);
+<span class="lineNum">     398 </span>                :            :     check(t3[4]==0);
+<span class="lineNum">     399 </span>                :            :     check(t3[5]==0); // NULL
+<span class="lineNum">     400 </span>                :            : }
+<span class="lineNum">     401 </span>                :            : 
+<span class="lineNum">     402 </span>                :            : void checkShiftRight(void)
+<span class="lineNum">     403 </span>                :            : {
+<span class="lineNum">     404 </span>                :            :     char t1[33]=&quot;123456789&quot;;
+<span class="lineNum">     405 </span>                :            :     char t1R[33]=&quot;00000000000000000000000123456789&quot;;
+<span class="lineNum">     406 </span>                :            :     shiftRight(t1);
+<span class="lineNum">     407 </span>                :            :     check(strcmp(t1,t1R)==0);
+<span class="lineNum">     408 </span>                :            :     char t2[33]=&quot;0A3210020&quot;;
+<span class="lineNum">     409 </span>                :            :     char t2R[33]=&quot;000000000000000000000000A3210020&quot;;
+<span class="lineNum">     410 </span>                :            :     shiftRight(t2);
+<span class="lineNum">     411 </span>                :            :     check(strcmp(t2,t2R)==0);
+<span class="lineNum">     412 </span>                :            :     char t3[33]=&quot;0123456789ABCDEF0123456789ABCDEF&quot;;
+<span class="lineNum">     413 </span>                :            :     char t3R[33]=&quot;0123456789ABCDEF0123456789ABCDEF&quot;;
+<span class="lineNum">     414 </span>                :            :     shiftRight(t3);
+<span class="lineNum">     415 </span>                :            :     check(strcmp(t3,t3R)==0);
+<span class="lineNum">     416 </span>                :            : }
+<span class="lineNum">     417 </span>                :            : 
+<span class="lineNum">     418 </span>                :            : void checkNeg(void)
+<span class="lineNum">     419 </span>                :            : {
+<span class="lineNum">     420 </span>                :            :     char t1[33]=&quot;0100&quot;;
+<span class="lineNum">     421 </span>                :            :     char t1R[33]=&quot;1011&quot;;
+<span class="lineNum">     422 </span>                :            :     shiftRight(t1);
+<span class="lineNum">     423 </span>                :            :     shiftRight(t1R);
+<span class="lineNum">     424 </span>                :            :     translateInputToInternal(t1);
+<span class="lineNum">     425 </span>                :            :     translateInputToInternal(t1R);
+<span class="lineNum">     426 </span>                :            :     neg(t1+32-4,4);
+<span class="lineNum">     427 </span>                :            :     check(memcmp(t1,t1R,32)==0);
+<span class="lineNum">     428 </span>                :            : }
+<span class="lineNum">     429 </span>                :            : 
+<span class="lineNum">     430 </span>                :            : void checkInc(void)
+<span class="lineNum">     431 </span>                :            : {
+<span class="lineNum">     432 </span>                :            :     char t1[33]=&quot;0100&quot;;
+<span class="lineNum">     433 </span>                :            :     char t1R[33]=&quot;0101&quot;;
+<span class="lineNum">     434 </span>                :            :     shiftRight(t1);
+<span class="lineNum">     435 </span>                :            :     shiftRight(t1R);
+<span class="lineNum">     436 </span>                :            :     translateInputToInternal(t1);
+<span class="lineNum">     437 </span>                :            :     translateInputToInternal(t1R);
+<span class="lineNum">     438 </span>                :            :     inc(t1+31);
+<span class="lineNum">     439 </span>                :            :     check(memcmp(t1,t1R,32)==0);
+<span class="lineNum">     440 </span>                :            :     char t2[33]=&quot;0111&quot;;
+<span class="lineNum">     441 </span>                :            :     char t2R[33]=&quot;1000&quot;;
+<span class="lineNum">     442 </span>                :            :     shiftRight(t2);
+<span class="lineNum">     443 </span>                :            :     shiftRight(t2R);
+<span class="lineNum">     444 </span>                :            :     translateInputToInternal(t2);
+<span class="lineNum">     445 </span>                :            :     translateInputToInternal(t2R);
+<span class="lineNum">     446 </span>                :            :     inc(t2+31);
+<span class="lineNum">     447 </span>                :            :     check(memcmp(t1,t1R,32)==0);
+<span class="lineNum">     448 </span>                :            : }
+<span class="lineNum">     449 </span>                :            : 
+<span class="lineNum">     450 </span>                :            : void checkDecodeAny(void)
+<span class="lineNum">     451 </span>                :            : {
+<span class="lineNum">     452 </span>                :            :     char t1[]=&quot;1234567890&quot;;
+<span class="lineNum">     453 </span>                :            :     strcpy(encoded,t1);
+<span class="lineNum">     454 </span>                :            :     shiftRight(encoded);
+<span class="lineNum">     455 </span>                :            :     translateInputToInternal(encoded);
+<span class="lineNum">     456 </span>                :            :     check(decodeAny(10)==1234567890);
+<span class="lineNum">     457 </span>                :            :     char t2[]=&quot;10101011101&quot;;
+<span class="lineNum">     458 </span>                :            :     strcpy(encoded,t2);
+<span class="lineNum">     459 </span>                :            :     shiftRight(encoded);
+<span class="lineNum">     460 </span>                :            :     translateInputToInternal(encoded);
+<span class="lineNum">     461 </span>                :            :     check(decodeAny(2)==0x55d);
+<span class="lineNum">     462 </span>                :            :     char t3[]=&quot;1234567230&quot;;
+<span class="lineNum">     463 </span>                :            :     strcpy(encoded,t3);
+<span class="lineNum">     464 </span>                :            :     shiftRight(encoded);
+<span class="lineNum">     465 </span>                :            :     translateInputToInternal(encoded);
+<span class="lineNum">     466 </span>                :            :     check(decodeAny(8)==01234567230);
+<span class="lineNum">     467 </span>                :            :     char t4[]=&quot;A6401AF2&quot;;
+<span class="lineNum">     468 </span>                :            :     strcpy(encoded,t4);
+<span class="lineNum">     469 </span>                :            :     shiftRight(encoded);
+<span class="lineNum">     470 </span>                :            :     translateInputToInternal(encoded);
+<span class="lineNum">     471 </span>                :            :     check(decodeAny(16)==0xA6401AF2);
+<span class="lineNum">     472 </span>                :            : }
+<span class="lineNum">     473 </span>                :            : 
+<span class="lineNum">     474 </span>                :            : #include &lt;limits.h&gt;
+<span class="lineNum">     475 </span>                :            : 
+<span class="lineNum">     476 </span>                :            : void checkDecodeU2(void)
+<span class="lineNum">     477 </span>                :            : {
+<span class="lineNum">     478 </span>                :            :     {
+<span class="lineNum">     479 </span>                :            :         char t1[]=&quot;0000000000000000&quot;;
+<span class="lineNum">     480 </span>                :            :         strcpy(encoded,t1);
+<span class="lineNum">     481 </span>                :            :         shiftRight(encoded);
+<span class="lineNum">     482 </span>                :            :         translateInputToInternal(encoded);
+<span class="lineNum">     483 </span>                :            :         check(decodeU2()==0);
+<span class="lineNum">     484 </span>                :            :     }
+<span class="lineNum">     485 </span>                :            :     {
+<span class="lineNum">     486 </span>                :            :         char t1[]=&quot;0000000000000001&quot;;
+<span class="lineNum">     487 </span>                :            :         strcpy(encoded,t1);
+<span class="lineNum">     488 </span>                :            :         shiftRight(encoded);
+<span class="lineNum">     489 </span>                :            :         translateInputToInternal(encoded);
+<span class="lineNum">     490 </span>                :            :         check(decodeU2()==1);
+<span class="lineNum">     491 </span>                :            :     }
+<span class="lineNum">     492 </span>                :            :     {
+<span class="lineNum">     493 </span>                :            :         char t1[]=&quot;1111111111111111&quot;;
+<span class="lineNum">     494 </span>                :            :         strcpy(encoded,t1);
+<span class="lineNum">     495 </span>                :            :         shiftRight(encoded);
+<span class="lineNum">     496 </span>                :            :         translateInputToInternal(encoded);
+<span class="lineNum">     497 </span>                :            :         check(decodeU2()==-1);
+<span class="lineNum">     498 </span>                :            :     }
+<span class="lineNum">     499 </span>                :            :     {
+<span class="lineNum">     500 </span>                :            :         char t1[]=&quot;1000000000000000&quot;;
+<span class="lineNum">     501 </span>                :            :         strcpy(encoded,t1);
+<span class="lineNum">     502 </span>                :            :         shiftRight(encoded);
+<span class="lineNum">     503 </span>                :            :         translateInputToInternal(encoded);
+<span class="lineNum">     504 </span>                :            :         check(decodeU2()==SHRT_MIN);
+<span class="lineNum">     505 </span>                :            :     }
+<span class="lineNum">     506 </span>                :            :     {
+<span class="lineNum">     507 </span>                :            :         char t1[]=&quot;1111111111111101&quot;;
+<span class="lineNum">     508 </span>                :            :         strcpy(encoded,t1);
+<span class="lineNum">     509 </span>                :            :         shiftRight(encoded);
+<span class="lineNum">     510 </span>                :            :         translateInputToInternal(encoded);
+<span class="lineNum">     511 </span>                :            :         check(decodeU2()==-3);
+<span class="lineNum">     512 </span>                :            :     }
+<span class="lineNum">     513 </span>                :            : }
+<span class="lineNum">     514 </span>                :            : 
+<span class="lineNum">     515 </span>                :            : void checkDecode(void)
+<span class="lineNum">     516 </span>                :            : {
+<span class="lineNum">     517 </span>                :            :     {
+<span class="lineNum">     518 </span>                :            :         char t1[]=&quot;1234567890&quot;;
+<span class="lineNum">     519 </span>                :            :         strcpy(encoded,t1);
+<span class="lineNum">     520 </span>                :            :         check(decode(10)==1234567890);
+<span class="lineNum">     521 </span>                :            :     }
+<span class="lineNum">     522 </span>                :            :     {
+<span class="lineNum">     523 </span>                :            :         char t1[]=&quot;1234567890&quot;;
+<span class="lineNum">     524 </span>                :            :         strcpy(encoded,t1);
+<span class="lineNum">     525 </span>                :            :         check(decode(10+16)==1234567890);
+<span class="lineNum">     526 </span>                :            :     }
+<span class="lineNum">     527 </span>                :            :     {
+<span class="lineNum">     528 </span>                :            :         char t1[]=&quot;10101011101&quot;;
+<span class="lineNum">     529 </span>                :            :         strcpy(encoded,t1);
+<span class="lineNum">     530 </span>                :            :         check(decode(2)==0x55d);
+<span class="lineNum">     531 </span>                :            :     }
+<span class="lineNum">     532 </span>                :            :     {
+<span class="lineNum">     533 </span>                :            :         char t1[]=&quot;10101011101&quot;;
+<span class="lineNum">     534 </span>                :            :         strcpy(encoded,t1);
+<span class="lineNum">     535 </span>                :            :         check(decode(2+16)==0x55d);
+<span class="lineNum">     536 </span>                :            :     }
+<span class="lineNum">     537 </span>                :            :     {
+<span class="lineNum">     538 </span>                :            :         char t1[]=&quot;1234567230&quot;;
+<span class="lineNum">     539 </span>                :            :         strcpy(encoded,t1);
+<span class="lineNum">     540 </span>                :            :         check(decode(8)==01234567230);
+<span class="lineNum">     541 </span>                :            :     }
+<span class="lineNum">     542 </span>                :            :     {
+<span class="lineNum">     543 </span>                :            :         char t1[]=&quot;1234567230&quot;;
+<span class="lineNum">     544 </span>                :            :         strcpy(encoded,t1);
+<span class="lineNum">     545 </span>                :            :         check(decode(8+16)==01234567230);
+<span class="lineNum">     546 </span>                :            :     }
+<span class="lineNum">     547 </span>                :            :     {
+<span class="lineNum">     548 </span>                :            :         char t1[]=&quot;A6401AF2&quot;;
+<span class="lineNum">     549 </span>                :            :         strcpy(encoded,t1);
+<span class="lineNum">     550 </span>                :            :         check(decode(16)==0xA6401AF2);
+<span class="lineNum">     551 </span>                :            :     }
+<span class="lineNum">     552 </span>                :            :     {
+<span class="lineNum">     553 </span>                :            :         char t1[]=&quot;0000000000000000&quot;;
+<span class="lineNum">     554 </span>                :            :         strcpy(encoded,t1);
+<span class="lineNum">     555 </span>                :            :         check(decode(1)==0);
+<span class="lineNum">     556 </span>                :            :     }
+<span class="lineNum">     557 </span>                :            :     {
+<span class="lineNum">     558 </span>                :            :         char t1[]=&quot;0000000000000000&quot;;
+<span class="lineNum">     559 </span>                :            :         strcpy(encoded,t1);
+<span class="lineNum">     560 </span>                :            :         check(decode(1+16)==0);
+<span class="lineNum">     561 </span>                :            :     }
+<span class="lineNum">     562 </span>                :            :     {
+<span class="lineNum">     563 </span>                :            :         char t1[]=&quot;0000000000000001&quot;;
+<span class="lineNum">     564 </span>                :            :         strcpy(encoded,t1);
+<span class="lineNum">     565 </span>                :            :         check(decode(1)==1);
+<span class="lineNum">     566 </span>                :            :     }
+<span class="lineNum">     567 </span>                :            :     {
+<span class="lineNum">     568 </span>                :            :         char t1[]=&quot;0000000000000001&quot;;
+<span class="lineNum">     569 </span>                :            :         strcpy(encoded,t1);
+<span class="lineNum">     570 </span>                :            :         check(decode(1+16)==1);
+<span class="lineNum">     571 </span>                :            :     }
+<span class="lineNum">     572 </span>                :            :     {
+<span class="lineNum">     573 </span>                :            :         char t1[]=&quot;1111111111111111&quot;;
+<span class="lineNum">     574 </span>                :            :         strcpy(encoded,t1);
+<span class="lineNum">     575 </span>                :            :         check(decode(1)==-1);
+<span class="lineNum">     576 </span>                :            :     }
+<span class="lineNum">     577 </span>                :            :     {
+<span class="lineNum">     578 </span>                :            :         char t1[]=&quot;1111111111111111&quot;;
+<span class="lineNum">     579 </span>                :            :         strcpy(encoded,t1);
+<span class="lineNum">     580 </span>                :            :         check(decode(1+16)==-1);
+<span class="lineNum">     581 </span>                :            :     }
+<span class="lineNum">     582 </span>                :            :     {
+<span class="lineNum">     583 </span>                :            :         char t1[]=&quot;1000000000000000&quot;;
+<span class="lineNum">     584 </span>                :            :         strcpy(encoded,t1);
+<span class="lineNum">     585 </span>                :            :         check(decode(1)==SHRT_MIN);
+<span class="lineNum">     586 </span>                :            :     }
+<span class="lineNum">     587 </span>                :            :     {
+<span class="lineNum">     588 </span>                :            :         char t1[]=&quot;1000000000000000&quot;;
+<span class="lineNum">     589 </span>                :            :         strcpy(encoded,t1);
+<span class="lineNum">     590 </span>                :            :         check(decode(1+16)==SHRT_MIN);
+<span class="lineNum">     591 </span>                :            :     }
+<span class="lineNum">     592 </span>                :            :     {
+<span class="lineNum">     593 </span>                :            :         char t1[]=&quot;1111111111111101&quot;;
+<span class="lineNum">     594 </span>                :            :         strcpy(encoded,t1);
+<span class="lineNum">     595 </span>                :            :         check(decode(1)==-3);
+<span class="lineNum">     596 </span>                :            :     }
+<span class="lineNum">     597 </span>                :            :     {
+<span class="lineNum">     598 </span>                :            :         char t1[]=&quot;1111111111111101&quot;;
+<span class="lineNum">     599 </span>                :            :         strcpy(encoded,t1);
+<span class="lineNum">     600 </span>                :            :         check(decode(1+16)==-3);
+<span class="lineNum">     601 </span>                :            :     }
+<span class="lineNum">     602 </span>                :            : }
+<span class="lineNum">     603 </span>                :            : 
+<span class="lineNum">     604 </span>                :            : void checkEncodeToLittleEndianInternal(void)
+<span class="lineNum">     605 </span>                :            : {
+<span class="lineNum">     606 </span>                :            :     int i;
+<span class="lineNum">     607 </span>                :            :     {
+<span class="lineNum">     608 </span>                :            :         char *t=encodeToLittleEndianInternal(0,2);
+<span class="lineNum">     609 </span>                :            :         for(i=0;i&lt;=32;++i)
+<span class="lineNum">     610 </span>                :            :             check(t[i]==0);
+<span class="lineNum">     611 </span>                :            :     }
+<span class="lineNum">     612 </span>                :            :     {
+<span class="lineNum">     613 </span>                :            :         char *t=encodeToLittleEndianInternal(1,2);
+<span class="lineNum">     614 </span>                :            :         check(t[0]==1);
+<span class="lineNum">     615 </span>                :            :         for(i=1;i&lt;=32;++i)
+<span class="lineNum">     616 </span>                :            :             check(t[i]==0);
+<span class="lineNum">     617 </span>                :            :     }
+<span class="lineNum">     618 </span>                :            :     {
+<span class="lineNum">     619 </span>                :            :         char *t=encodeToLittleEndianInternal(15,16);
+<span class="lineNum">     620 </span>                :            :         check(t[0]==15);
+<span class="lineNum">     621 </span>                :            :         for(i=1;i&lt;=32;++i)
+<span class="lineNum">     622 </span>                :            :             check(t[i]==0);
+<span class="lineNum">     623 </span>                :            :     }
+<span class="lineNum">     624 </span>                :            :     {
+<span class="lineNum">     625 </span>                :            :         char *t=encodeToLittleEndianInternal(16,16);
+<span class="lineNum">     626 </span>                :            :         check(t[0]==0);
+<span class="lineNum">     627 </span>                :            :         check(t[1]==1);
+<span class="lineNum">     628 </span>                :            :         for(i=2;i&lt;=32;++i)
+<span class="lineNum">     629 </span>                :            :             check(t[i]==0);
+<span class="lineNum">     630 </span>                :            :     }
+<span class="lineNum">     631 </span>                :            :     {
+<span class="lineNum">     632 </span>                :            :         char *t=encodeToLittleEndianInternal(16,10);
+<span class="lineNum">     633 </span>                :            :         check(t[0]==6);
+<span class="lineNum">     634 </span>                :            :         check(t[1]==1);
+<span class="lineNum">     635 </span>                :            :         for(i=2;i&lt;=32;++i)
+<span class="lineNum">     636 </span>                :            :             check(t[i]==0);
+<span class="lineNum">     637 </span>                :            :     }
+<span class="lineNum">     638 </span>                :            :     {
+<span class="lineNum">     639 </span>                :            :         char *t=encodeToLittleEndianInternal(15,2);
+<span class="lineNum">     640 </span>                :            :         check(t[0]==1);
+<span class="lineNum">     641 </span>                :            :         check(t[1]==1);
+<span class="lineNum">     642 </span>                :            :         check(t[2]==1);
+<span class="lineNum">     643 </span>                :            :         check(t[3]==1);
+<span class="lineNum">     644 </span>                :            :         for(i=4;i&lt;=32;++i)
+<span class="lineNum">     645 </span>                :            :             check(t[i]==0);
+<span class="lineNum">     646 </span>                :            :     }
+<span class="lineNum">     647 </span>                :            : }
+<span class="lineNum">     648 </span>                :            : 
+<a name="649"><span class="lineNum">     649 </span>                :            : #endif // DEBUG</a>
+<span class="lineNum">     650 </span>                :            : 
+<span class="lineNum">     651 </span>                :<span class="lineCov">          1 : int main(int argc,char**argv)</span>
+<span class="lineNum">     652 </span>                :            : {
+<span class="lineNum">     653 </span>                :            :     #ifdef DEBUG
+<span class="lineNum">     654 </span>                :            :     init(argc,argv);
+<span class="lineNum">     655 </span>                :            :     checkTranslateInputToInternal();
+<span class="lineNum">     656 </span>                :            :     checkShiftRight();
+<span class="lineNum">     657 </span>                :            :     checkNeg();
+<span class="lineNum">     658 </span>                :            :     checkInc();
+<span class="lineNum">     659 </span>                :            :     checkDecodeAny();
+<span class="lineNum">     660 </span>                :            :     checkDecodeU2();
+<span class="lineNum">     661 </span>                :            :     checkDecode();
+<span class="lineNum">     662 </span>                :            :     checkEncodeToLittleEndianInternal();
+<span class="lineNum">     663 </span>                :            :     #endif // DEBUG
+<span class="lineNum">     664 </span>                :<span class="lineCov">          1 :     solution();</span>
+<span class="lineNum">     665 </span>                :            : #ifdef DEBUG
+<span class="lineNum">     666 </span>                :            :     end();
+<span class="lineNum">     667 </span>                :            : #endif // DEBUG
+<span class="lineNum">     668 </span>                :<span class="lineCov">          1 :     return 0;</span>
+<span class="lineNum">     669 </span>                :            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

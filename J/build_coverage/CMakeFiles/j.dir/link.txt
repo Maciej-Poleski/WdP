@@ -1,0 +1,1 @@
+/usr/bin/gcc  -fprofile-arcs -ftest-coverage -Wall -Wextra -g    -coverage CMakeFiles/j.dir/main.c.o  -o j -rdynamic 
