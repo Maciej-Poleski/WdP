@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++0x -O3 -DNDEBUG    CMakeFiles/find_test.dir/find.cxx.o  -o find_test -rdynamic 
