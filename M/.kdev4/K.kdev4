@@ -1,0 +1,43 @@
+[Buildset]
+BuildItems=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x01\x00\x00\x00\x02\x00K)
+
+[CMake]
+BuildDirs[$e]=$HOME/Studia/Przedmioty/WdP/K/build,$HOME/Studia/Przedmioty/WdP/K/build_release
+CMakeDir=/usr/share/cmake/Modules
+Current CMake Binary=file:///usr/bin/cmake
+CurrentBuildDir=file:///home/evil/Studia/Przedmioty/WdP/K/build_release
+CurrentBuildType=Release
+CurrentInstallDir=
+ProjectRootRelative=./
+
+[Launch]
+Launch Configurations=Launch Configuration 0
+
+[Launch][Launch Configuration 0]
+Configured Launch Modes=execute
+Configured Launchers=nativeAppLauncher
+Name=k
+Type=Native Application
+
+[Launch][Launch Configuration 0][Data]
+Arguments=testy/t00.in testy/t00.tout
+Debugger Shell=
+Dependencies=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x02\x00\x00\x00\x02\x00K\x00\x00\x00\x02\x00k)
+Dependency Action=Build
+Display Demangle Names=true
+Display Static Members=true
+EnvironmentGroup=default
+Executable=
+External Terminal=konsole --noclose --workdir %workdir -e %exe
+GDB Path=
+Project Target=K,k
+Remote GDB Config Script=
+Remote GDB Run Script=
+Remote GDB Shell Script=
+Use External Terminal=false
+Working Directory=file:///home/evil/Studia/Przedmioty/WdP/K
+isExecutable=false
+
+[MakeBuilder]
+Default Make Environment Profile=0
+Number Of Jobs=1

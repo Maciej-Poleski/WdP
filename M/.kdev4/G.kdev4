@@ -1,0 +1,16 @@
+[Buildset]
+BuildItems=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x01\x00\x00\x00\x02\x00G)
+
+[CMake]
+BuildDirs=/home/evil/Studia/Przedmioty/WdP/G/build
+CMakeDir=/usr/share/cmake/Modules
+Current CMake Binary=file:///usr/bin/cmake
+CurrentBuildDir=file:///home/evil/Studia/Przedmioty/WdP/G/build
+CurrentBuildType=Debug
+CurrentInstallDir=
+Extra Arguments=-DDEBUG=Yes
+ProjectRootRelative=./
+
+[MakeBuilder]
+Default Make Environment Profile=0
+Number Of Jobs=1
