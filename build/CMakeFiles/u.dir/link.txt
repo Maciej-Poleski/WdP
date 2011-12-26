@@ -1,0 +1,1 @@
+/usr/bin/gcc  -g    -lm CMakeFiles/u.dir/main.c.o  -o u -rdynamic 

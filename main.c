@@ -254,7 +254,7 @@ inline int length(char id)
     const Node *i=frontGuard[id-'A'].next;
     const Node * const ei=&backGuard[id-'A'];
     int len=0;
-    for(;i!=ei;i=i->next)
+    for(; i!=ei; i=i->next)
         ++len;
     return len;
 }
