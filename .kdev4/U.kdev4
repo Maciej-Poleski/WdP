@@ -2,13 +2,12 @@
 BuildItems=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x01\x00\x00\x00\x02\x00U)
 
 [CMake]
-BuildDirs[$e]=$HOME/Studia/Przedmioty/WdP/U/build,$HOME/Studia/Przedmioty/WdP/U/build_prof
+BuildDirs[$e]=$HOME/Studia/Przedmioty/WdP/U/build
 CMakeDir=/usr/share/cmake/Modules
 Current CMake Binary=file:///usr/bin/cmake
-CurrentBuildDir=file:///home/evil/Studia/Przedmioty/WdP/U/build_prof
-CurrentBuildType=RelWithDebInfo
-CurrentInstallDir=
-Extra Arguments=-DCOVERAGE=Yes
+CurrentBuildDir=file:///home/evil/Studia/Przedmioty/WdP/U/build
+CurrentBuildType=Debug
+Extra Arguments=-DDEBUG=Yes
 ProjectRootRelative=./
 
 [Launch]

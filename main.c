@@ -249,6 +249,16 @@ inline bool isEmpty(char id)
     return frontGuard[id-'A'].next==&backGuard[id-'A'];
 }
 
+inline int length(char id)
+{
+    const Node *i=frontGuard[id-'A'].next;
+    const Node * const ei=&backGuard[id-'A'];
+    int len=0;
+    for(;i!=ei;i=i->next)
+        ++len;
+    return len;
+}
+
 inline void multi(char id1,char id2)
 {
     printf("MULTI OK\n"); // Z góry wiem że się uda
@@ -261,6 +271,15 @@ inline void multi(char id1,char id2)
         return;
     static const char mono_mul_poly='Z'-'A'+1;
     static const char poly_mul_poly='Z'-'A'+2;
+    /* Wprowadzam heurystyczne optymalizacje. Niech len(1)<len(2) */
+    int len1 = length(id1);
+    int len2=length(id2);
+    if(len1>len2)
+    {
+        char t=id1;
+        id1=id2;
+        id2=id1;
+    }
     const Node *i=frontGuard[id1-'A'].next;
     const Node * const ei=&backGuard[id1-'A'];
     for(; i!=ei; i=i->next)
@@ -279,6 +298,12 @@ inline void multi(char id1,char id2)
         backGuard[mono_mul_poly].back->next=&backGuard[mono_mul_poly];
         addSilent(poly_mul_poly+'A',mono_mul_poly+'A');
         cleanSilent(mono_mul_poly+'A');
+    }
+    if(len1>len2)
+    {
+        char t=id1;
+        id1=id2;
+        id2=id1;
     }
     cleanSilent(id1);
     addSilent(id1,poly_mul_poly+'A');
