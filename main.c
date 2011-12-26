@@ -278,7 +278,7 @@ inline void multi(char id1,char id2)
     {
         char t=id1;
         id1=id2;
-        id2=id1;
+        id2=t;
     }
     const Node *i=frontGuard[id1-'A'].next;
     const Node * const ei=&backGuard[id1-'A'];
@@ -303,7 +303,7 @@ inline void multi(char id1,char id2)
     {
         char t=id1;
         id1=id2;
-        id2=id1;
+        id2=t;
     }
     cleanSilent(id1);
     addSilent(id1,poly_mul_poly+'A');
