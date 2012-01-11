@@ -1,0 +1,1 @@
+/usr/bin/c++-analyzer   -std=c++0x    CMakeFiles/find_test.dir/find.cxx.o  -o find_test -rdynamic 

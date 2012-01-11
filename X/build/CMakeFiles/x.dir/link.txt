@@ -1,0 +1,1 @@
+/usr/bin/ccc-analyzer      -lm CMakeFiles/x.dir/main.c.o  -o x -rdynamic 
