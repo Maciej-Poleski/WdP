@@ -1,0 +1,2 @@
+/home/evil/Studia/Przedmioty/WdP/Y/build/CMakeFiles/find_test.dir
+/home/evil/Studia/Przedmioty/WdP/Y/build/CMakeFiles/y.dir
