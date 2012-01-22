@@ -1,0 +1,1 @@
+/usr/bin/gcc  -g    -lm CMakeFiles/alpha.dir/main.c.o  -o alpha -rdynamic 

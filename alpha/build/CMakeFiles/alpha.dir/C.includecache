@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/evil/Studia/Przedmioty/WdP/alpha/main.c
+stdio.h
+-
+stdlib.h
+-
+stdint.h
+-
+stdbool.h
+-
+limits.h
+-
+string.h
+-
+ctype.h
+-
+assert.h
+-
+time.h
+-
+stdarg.h
+-
+math.h
+-
+error.h
+-
+errno.h
+-
+
