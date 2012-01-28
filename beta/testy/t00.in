@@ -1,0 +1,43 @@
+4
+6 lr
+-3 -2 -2 -2 8 9
+5
+-5 p
+-2 p
+-2 o
+10 o
+-5 o
+7 nm
+koza koza koza kot alabaster ala ala
+5
+krowa p
+koza p
+foka p
+ala o
+a o
+8 dr
+ala kot kot koza koza koza bankomat krokodyl
+6
+koza p
+foka p
+kot p
+ala o
+z o
+konstantynopol p
+10 sr
+ciesla 1000 35
+ciesla 2000 25
+ciesla 2000 35
+ciesla 2000 35
+ciesla 2000 35
+kowal 1500 25
+kowal 3500 15
+lekarz 3000 30
+lekarz 3000 40
+lekarz 3000 40
+5
+lekarz 3000 40 o
+lekarz 3000 50 o
+ciesla 1500 35 p
+ciesla 2000 35 p
+kowal 1500 25 o
